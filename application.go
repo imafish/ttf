@@ -33,13 +33,16 @@ type Application struct {
 	widgets     []*Widget       // Widgets that are currently active in the application TODO: maybe this is not needed. Widgets can be managed in commands.
 	uiEventChan <-chan ui.Event // Channel to receive UI events
 	size        image.Point
+
+	title string // Title of the application, can be used for display purposes
 }
 
-func NewApplication() *Application {
+func NewApplication(title string) *Application {
 	return &Application{
 		commands: make(map[string]Command, 32),
 		state:    applicationStateNormal,
 		quitFlag: false,
+		title:    title,
 	}
 }
 
@@ -130,7 +133,7 @@ func (app *Application) Initialize() error {
 	app.mainGrid = ui.NewGrid()
 
 	app.mainWidget = widgets.NewParagraph()
-	app.mainWidget.Title = "Welcome to TTF Application"
+	app.mainWidget.Title = app.title
 
 	app.cmdWidget = widgets.NewParagraph()
 	app.cmdWidget.Title = "Command"
