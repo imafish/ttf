@@ -30,3 +30,4 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+examples/show_help_and_press_key_to_quit/main
